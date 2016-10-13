@@ -27,21 +27,16 @@ export default class ArtList extends Component {
 
   render() {
     return (
-        <View style={{paddingTop: 22, flex: 1}}>
           <ListView
             contentContainerStyle={styles.list}
             dataSource={this.state.dataSource}
             renderRow={this.renderRowData}
           />
-        </View>
     );
   }
 
   renderRowData(rowData) {
       let url = rowData.photos[0].image
-      let onPress = () => {
-          console.log("Ok. This button was pressed!");
-      }
       return (
           <ArtObjectInList image={url}/>
       )
@@ -50,9 +45,8 @@ export default class ArtList extends Component {
 
 const styles = StyleSheet.create({
   list: {
-    alignItems: 'center',
+    paddingTop: 22,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-around'
   }
 });

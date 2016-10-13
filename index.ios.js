@@ -18,9 +18,7 @@ class MainScene extends Component {
 
      render() {
          return (
-             <View>
-                 <ArtList />
-             </View>
+            <ArtList/>
          )
      }
  }
