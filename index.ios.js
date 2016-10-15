@@ -11,36 +11,38 @@ import ArtList from './app/ArtList'
 
 class MainScene extends Component {
     static get defaultProps() {
-         return {
-             title: 'Art List'
-         };
-     }
+        return {
+            title: 'Art List'
+        };
+    }
 
-     render() {
-         return (
-            <ArtList/>
-         )
-     }
- }
+    render() {
+        return (
+            <View>
+                <ArtList/>
+            </View>
+        )
+    }
+}
 
- class DetailedArtInfoScene extends Component {
-     static get defaultProps() {
-         return {
-             title: ''
-         }
-     }
- }
+class DetailedArtInfoScene extends Component {
+    static get defaultProps() {
+        return {
+            title: ''
+        }
+    }
+}
 
- class StreetArtNative extends Component {
-     render() {
-         return (
-             <Navigator
+class StreetArtNative extends Component {
+    render() {
+        return (
+            <Navigator
                 initialRoute={{ title: 'My Initial Scene', index: 0 }}
                 renderScene={(route, navigator) => {
                     return <MainScene title={route.title} />
                 }}/>
-         )
-     }
- }
+            )
+        }
+    }
 
 AppRegistry.registerComponent('StreetArtNative', () => StreetArtNative);

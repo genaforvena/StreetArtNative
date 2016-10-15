@@ -39,16 +39,17 @@ export default class ArtList extends Component {
         let url = rowData.photos[0].image
         return (
             <TouchableHighlight
-                style={styles.itemContainer}
-                onPress={() => {
-                    console.log(rowData);
-                }}>
-                <View style={{ flex: 1 }}>
-                    <ArtObjectInList image={url}/>
-                </View>
-            </TouchableHighlight>
-        )
-    }
+                onPress={ () => {
+                    alert(rowData)
+                }
+            }
+            style={styles.itemContainer}>
+            <View style={{ flex: 1 }}>
+                <ArtObjectInList image={url}/>
+            </View>
+        </TouchableHighlight>
+    )
+}
 }
 
 const styles = StyleSheet.create({
