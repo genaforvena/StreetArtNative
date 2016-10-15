@@ -3,35 +3,10 @@
 import React, { Component } from 'react';
 import {
     Navigator,
-    AppRegistry,
-    View
+    AppRegistry
 } from 'react-native';
 
-import ArtList from './app/ArtList'
-
-class MainScene extends Component {
-    static get defaultProps() {
-        return {
-            title: 'Art List'
-        };
-    }
-
-    render() {
-        return (
-            <View>
-                <ArtList/>
-            </View>
-        )
-    }
-}
-
-class DetailedArtInfoScene extends Component {
-    static get defaultProps() {
-        return {
-            title: ''
-        }
-    }
-}
+import MainScene from './app/MainScene';
 
 class StreetArtNative extends Component {
     render() {
@@ -42,7 +17,7 @@ class StreetArtNative extends Component {
                     return <MainScene title={route.title} />
                 }}/>
             )
-        }
     }
+}
 
 AppRegistry.registerComponent('StreetArtNative', () => StreetArtNative);
