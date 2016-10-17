@@ -1,8 +1,10 @@
 'use strict'
 
 import React, { Component } from 'react';
-
-import ArtObjectDetails from './ArtObjectDetails';
+import {
+    View,
+    Text
+} from 'react-native';
 
 export default class DetailArtScene extends Component {
     static get defaultProps() {
@@ -16,4 +18,14 @@ export default class DetailArtScene extends Component {
             <ArtObjectDetails />
         )
     }
+}
+
+class ArtObjectDetails extends Component {
+  render() {
+    return (
+      <View style = {{ padding: 22 }}>
+          <Text>Hello!</Text>
+      </View>
+    );
+  }
 }

@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 
 import MainScene from './app/MainScene';
+import DetailArtScene from './app/DetailArtScene';
 
 class StreetArtNative extends Component {
     render() {
@@ -14,10 +15,19 @@ class StreetArtNative extends Component {
             <Navigator
                 initialRoute={{ title: 'My Initial Scene', index: 0 }}
                 renderScene={(route, navigator) => {
-                    return <MainScene title={route.title} />
+                    if (route.index == 0) {
+                        return <MainScene
+                            navigator = { navigator }
+                            title={route.title} />
+                    } else {
+                        return <DetailArtScene
+                            navigator = { navigator }
+                            title = "DetailArtScene"
+                            />
+                    }
                 }}/>
             )
+        }
     }
-}
 
 AppRegistry.registerComponent('StreetArtNative', () => StreetArtNative);
