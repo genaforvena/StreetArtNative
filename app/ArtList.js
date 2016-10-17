@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import { ArtObjectInList } from './ArtObjectInList'
+import DetailArtScene from './DetailArtScene'
 import fetchArtObjects from './fetch'
 
 export default class ArtList extends Component {
@@ -26,30 +27,33 @@ export default class ArtList extends Component {
     }
 
     render() {
+        console.log(this);
         return (
             <ListView
                 contentContainerStyle={styles.list}
                 dataSource={this.state.dataSource}
-                renderRow={this.renderRowData}
+                renderRow={this.renderRowData.bind(this)}
                 />
         );
+    }
+
+    onItemPress(rowData) {
+        debugger;
+        console.log(rowData);
     }
 
     renderRowData(rowData) {
         let url = rowData.photos[0].image
         return (
             <TouchableHighlight
-                onPress={ () => {
-                    alert(rowData)
-                }
-            }
-            style={styles.itemContainer}>
-            <View style={{ flex: 1 }}>
-                <ArtObjectInList image={url}/>
-            </View>
-        </TouchableHighlight>
-    )
-}
+                onPress = { () => this.onItemPress(rowData) }
+                style={styles.itemContainer}>
+                <View style={{ flex: 1 }}>
+                    <ArtObjectInList image={url}/>
+                </View>
+            </TouchableHighlight>
+        )
+    }
 }
 
 const styles = StyleSheet.create({
