@@ -23,7 +23,7 @@ export default class MainScene extends Component {
 
     render() {
         return (
-            <ArtList/>
+            <ArtList navigator = { this.props.navigator }/>
         )
     }
 }
@@ -42,7 +42,6 @@ class ArtList extends Component {
     }
 
     render() {
-        console.log(this);
         return (
             <ListView
                 contentContainerStyle={styles.list}
@@ -54,7 +53,8 @@ class ArtList extends Component {
 
     onItemPress(rowData) {
         this.props.navigator.push({
-            index: 1
+            index: 1,
+            data: rowData
         })
     }
 

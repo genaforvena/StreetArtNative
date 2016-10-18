@@ -10,22 +10,24 @@ import MainScene from './app/MainScene';
 import DetailArtScene from './app/DetailArtScene';
 
 class StreetArtNative extends Component {
+    renderScene(route, navigator) {
+        if (route.index == 0) {
+            return <MainScene
+                navigator = { navigator }
+                title={route.title} />
+        } else {
+            return <DetailArtScene
+                navigator = { navigator }
+                data = { route.data }
+                title = "DetailArtScene" />
+        }
+    }
+
     render() {
         return (
             <Navigator
                 initialRoute={{ title: 'My Initial Scene', index: 0 }}
-                renderScene={(route, navigator) => {
-                    if (route.index == 0) {
-                        return <MainScene
-                            navigator = { navigator }
-                            title={route.title} />
-                    } else {
-                        return <DetailArtScene
-                            navigator = { navigator }
-                            title = "DetailArtScene"
-                            />
-                    }
-                }}/>
+                renderScene={ this.renderScene }/>
             )
         }
     }
