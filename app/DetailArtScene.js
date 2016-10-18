@@ -41,6 +41,11 @@ class ArtObjectDetails extends Component {
     render() {
         let artObject = this.props.data;
         let imageUrl = artObject.photos[0].image
+        let marker = [{
+            latitude: artObject.location.lat,
+            longitude: artObject.location.lng,
+            title: artObject.location.address
+        }]
         return (
             <View style = {{ flex: 1, paddingTop: 22 }}>
                 <TouchableHighlight
@@ -54,7 +59,8 @@ class ArtObjectDetails extends Component {
                         source = {{ uri : imageUrl }}/>
                     <MapView
                         style = {{ height: windowWidth, width: windowWidth }}
-                        showUserLocation = { true }/>
+                        showUserLocation = { true }
+                        annotations={marker}/>
                     <Text>Hello</Text>
                 </ScrollView>
             </View>
