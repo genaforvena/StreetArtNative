@@ -53,19 +53,19 @@ class ArtList extends Component {
 
     onItemPress(rowData) {
         this.props.navigator.push({
-            index: 1,
+            name: "Details",
             data: rowData
         })
     }
 
     renderRowData(rowData) {
-        let url = rowData.photos[0].image
+        let { image }  = rowData.photos[0]
         return (
             <TouchableHighlight
                 onPress = { () => this.onItemPress(rowData) }
                 style={styles.itemContainer}>
                 <View style={{ flex: 1 }}>
-                    <ArtObjectInList image={url}/>
+                    <ArtObjectInList image={ image }/>
                 </View>
             </TouchableHighlight>
         )

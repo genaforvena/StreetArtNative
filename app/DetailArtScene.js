@@ -5,8 +5,13 @@ import {
     TouchableHighlight,
     Image,
     View,
+    MapView,
+    Dimensions,
+    ScrollView,
     Text
 } from 'react-native';
+
+let windowWidth = Dimensions.get('window').width
 
 export default class DetailArtScene extends Component {
     static get defaultProps() {
@@ -29,7 +34,7 @@ class ArtObjectDetails extends Component {
 
     navigateBack() {
         this.props.navigator.push({
-            index: 0
+            name: "Main"
         })
     }
 
@@ -37,14 +42,21 @@ class ArtObjectDetails extends Component {
         let artObject = this.props.data;
         let imageUrl = artObject.photos[0].image
         return (
-            <View style = {{ padding: 22 }}>
+            <View style = {{ flex: 1, paddingTop: 22 }}>
                 <TouchableHighlight
                     onPress = {this.navigateBack}
-                    style = {{ height: 100, width: 100}} >
+                    style = {{ height: 22, width: 100}} >
                     <Text>Back</Text>
                 </TouchableHighlight>
-                <Image style = {{ height: 200, width: 300 }} source = {{ uri : imageUrl }}/>
-                <Text>Hello</Text>
+                <ScrollView>
+                    <Image
+                        style = {{ height: windowWidth, width: windowWidth }}
+                        source = {{ uri : imageUrl }}/>
+                    <MapView
+                        style = {{ height: windowWidth, width: windowWidth }}
+                        showUserLocation = { true }/>
+                    <Text>Hello</Text>
+                </ScrollView>
             </View>
         );
     }
