@@ -8,6 +8,7 @@ import {
     Image,
     Text,
     Navigator,
+    TabBarIOS,
     View
 } from 'react-native';
 
@@ -17,13 +18,54 @@ import fetchArtObjects from './fetch'
 export default class MainScene extends Component {
     static get defaultProps() {
         return {
-            title: 'Art List'
+            title: 'Main Scene'
         };
     }
 
+
+    state = {
+        selectedTab: 'list'
+    };
+
+    _renderContent = (name: string) => {
+        if (name == "map") {
+            return (
+                <Text style={styles.tabText}>There shall be the map!</Text>
+            )
+        } else if (name == "list") {
+            return (
+                <ArtList navigator = {this.props.navigator}/>
+            )
+        }
+    };
+
     render() {
         return (
-            <ArtList navigator = { this.props.navigator }/>
+            <TabBarIOS
+                unselectedTintColor="yellow"
+                tintColor="white"
+                barTintColor="darkslateblue">
+                <TabBarIOS.Item
+                    title="Map"
+                    selected={this.state.selectedTab === 'map'}
+                    onPress={() => {
+                        this.setState({
+                            selectedTab: 'map'
+                        });
+                    }}>
+                    {this._renderContent('map')}
+                </TabBarIOS.Item>
+                <TabBarIOS.Item
+                    systemIcon="history"
+                    selected={this.state.selectedTab === 'list'}
+                    onPress={() => {
+                        this.setState({
+                            selectedTab: 'list'
+                        });
+                    }}>
+                    {this._renderContent('list')}
+                </TabBarIOS.Item>
+            </TabBarIOS>
         )
     }
 }
@@ -95,5 +137,13 @@ const styles = StyleSheet.create({
         paddingTop: 22,
         flexDirection: 'row',
         flexWrap: 'wrap',
-    }
+    },
+    tabContent: {
+        flex: 1,
+        alignItems: 'center',
+    },
+    tabText: {
+        color: 'white',
+        margin: 50,
+    },
 });
