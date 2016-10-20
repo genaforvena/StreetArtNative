@@ -6,6 +6,7 @@ import {
     ListView,
     TouchableHighlight,
     Image,
+    MapView,
     Text,
     Navigator,
     TabBarIOS,
@@ -22,7 +23,6 @@ export default class MainScene extends Component {
         };
     }
 
-
     state = {
         selectedTab: 'list'
     };
@@ -30,7 +30,7 @@ export default class MainScene extends Component {
     _renderContent = (name: string) => {
         if (name == "map") {
             return (
-                <Text style={styles.tabText}>There shall be the map!</Text>
+                <ArtMap />
             )
         } else if (name == "list") {
             return (
@@ -67,6 +67,18 @@ export default class MainScene extends Component {
                 </TabBarIOS.Item>
             </TabBarIOS>
         )
+    }
+}
+
+class ArtMap extends Component {
+    constructor(props) {
+        super(props)
+    }
+
+    render() {
+        return (
+            <MapView style = {{ flex: 1 }}/>
+        );
     }
 }
 
