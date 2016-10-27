@@ -24,7 +24,7 @@ export default class MainScene extends Component {
     }
 
     state = {
-        selectedTab: 'list'
+        selectedTab: 'map'
     };
 
     _renderContent = (name: string) => {
@@ -73,11 +73,41 @@ export default class MainScene extends Component {
 class ArtMap extends Component {
     constructor(props) {
         super(props)
+
+        this.state = {
+            markers :[]
+        }
+    }
+
+    componentDidMount() {
+        fetchArtObjects((json) => {
+            let markers = json.map(item => {
+                let { name, location } = item
+                return {
+                    latitude: location.lat,
+                    longitude: location.lng,
+                    subtitle: location.address,
+                    title: name
+                }
+            });
+            this.setState({
+                markers: markers
+            })
+        })
     }
 
     render() {
+        console.log(this.state);
         return (
-            <MapView style = {{ flex: 1 }}/>
+            <MapView
+                region = {{
+                    latitude: 56.32,
+                    longitude: 44,
+                    latitudeDelta: 0.1,
+                    longitudeDelta: 0.1
+                }}
+                annotations = { this.state.markers }
+                style = {{ flex: 1 }}/>
         );
     }
 }
@@ -89,7 +119,9 @@ class ArtList extends Component {
         this.state = {
             dataSource: ds.cloneWithRows([])
         };
+    }
 
+    componentDidMount() {
         fetchArtObjects((json) => {
             this.setState({ dataSource : this.state.dataSource.cloneWithRows(json)});
         });
