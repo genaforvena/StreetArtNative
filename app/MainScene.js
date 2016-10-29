@@ -130,6 +130,7 @@ class ArtList extends Component {
     render() {
         return (
             <ListView
+                enableEmptySections={true}
                 contentContainerStyle={styles.list}
                 dataSource={this.state.dataSource}
                 renderRow={this.renderRowData.bind(this)}
