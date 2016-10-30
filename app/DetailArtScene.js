@@ -6,6 +6,7 @@ import {
     Image,
     View,
     MapView,
+    StyleSheet,
     Dimensions,
     ScrollView,
     Text
@@ -40,8 +41,7 @@ class ArtObjectDetails extends Component {
 
     render() {
         let artObject = this.props.data;
-        console.log(artObject);
-        let { image }= artObject.photos[0];
+        let { image } = artObject.photos[0];
         let { location } = artObject;
         let artist = artObject.artists[0].name;
         let { name } = artObject;
@@ -68,7 +68,7 @@ class ArtObjectDetails extends Component {
                 </TouchableHighlight>
                 <ScrollView>
                     <Image
-                        style = {{ height: windowWidth, width: windowWidth }}
+                        style = { styles.image }
                         source = {{ uri : image }}/>
                     <View>
                         <Text> { artist }</Text>
@@ -76,7 +76,7 @@ class ArtObjectDetails extends Component {
                         <Text> { address }</Text>
                     </View>
                     <MapView
-                        style = {{ height: windowWidth, width: windowWidth }}
+                        style = { styles.map }
                         showUserLocation = { true }
                         scrollEnabled = { false }
                         region = { region }
@@ -86,3 +86,14 @@ class ArtObjectDetails extends Component {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    image: {
+        height: windowWidth,
+        width: windowWidth
+    },
+    map: {
+        height: windowWidth,
+        width: windowWidth
+    }
+});
