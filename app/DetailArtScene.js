@@ -34,18 +34,27 @@ class ArtObjectDetails extends Component {
 
     navigateBack() {
         this.props.navigator.push({
-            name: "Main"
+            name: "main"
         })
     }
 
     render() {
         let artObject = this.props.data;
-        let imageUrl = artObject.photos[0].image
+        let { imageUrl } = artObject.photos[0]
+        let { location } = artObject
+
         let marker = [{
-            latitude: artObject.location.lat,
-            longitude: artObject.location.lng,
-            title: artObject.location.address
+            latitude: location.lat,
+            longitude: location.lng,
+            title: location.address
         }]
+
+        let region = {
+            latitude: location.lat,
+            longitude: location.lng,
+            latitudeDelta: 0.05,
+            longitudeDelta: 0.05
+        }
         return (
             <View style = {{ flex: 1, paddingTop: 22 }}>
                 <TouchableHighlight
@@ -60,8 +69,8 @@ class ArtObjectDetails extends Component {
                     <MapView
                         style = {{ height: windowWidth, width: windowWidth }}
                         showUserLocation = { true }
-                        annotations={marker}/>
-                    <Text>Hello</Text>
+                        region = { region }
+                        annotations={ marker }/>
                 </ScrollView>
             </View>
         );

@@ -11,11 +11,11 @@ import DetailArtScene from './app/DetailArtScene';
 
 class StreetArtNative extends Component {
     renderScene(route, navigator) {
-        if (route.name == "Main") {
+        if (route.name == "main") {
             return <MainScene
                 navigator = { navigator }
-                title={route.title} />
-        } else if (route.name == "Details"){
+                title = { route.title } />
+        } else if (route.name == "detail"){
             return <DetailArtScene
                 navigator = { navigator }
                 data = { route.data }
@@ -26,7 +26,7 @@ class StreetArtNative extends Component {
     render() {
         return (
             <Navigator
-                initialRoute={{ title: 'My Initial Scene', name: "Main" }}
+                initialRoute={{ title: 'My Initial Scene', name: "main" }}
                 renderScene={ this.renderScene }/>
             )
         }

@@ -8,7 +8,6 @@ import {
     Image,
     MapView,
     Text,
-    Navigator,
     TabBarIOS,
     View
 } from 'react-native';
@@ -24,7 +23,7 @@ export default class MainScene extends Component {
     }
 
     state = {
-        selectedTab: 'map'
+        selectedTab: 'list'
     };
 
     _renderContent = (name: string) => {
@@ -142,7 +141,7 @@ class ArtList extends Component {
 
     onItemPress(rowData) {
         this.props.navigator.push({
-            name: "Details",
+            name: "detail",
             data: rowData
         })
     }
