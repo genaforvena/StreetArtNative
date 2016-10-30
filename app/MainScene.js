@@ -100,6 +100,8 @@ class ArtMap extends Component {
         console.log(this.state);
         return (
             <MapView
+                zoomEnabled = { true }
+                showsUserLocation = { true }
                 region = {{
                     latitude: 56.32,
                     longitude: 44,
