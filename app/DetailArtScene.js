@@ -40,8 +40,12 @@ class ArtObjectDetails extends Component {
 
     render() {
         let artObject = this.props.data;
-        let { imageUrl } = artObject.photos[0]
-        let { location } = artObject
+        console.log(artObject);
+        let { image }= artObject.photos[0];
+        let { location } = artObject;
+        let artist = artObject.artists[0].name;
+        let { name } = artObject;
+        let { address } = location;
 
         let marker = [{
             latitude: location.lat,
@@ -65,10 +69,16 @@ class ArtObjectDetails extends Component {
                 <ScrollView>
                     <Image
                         style = {{ height: windowWidth, width: windowWidth }}
-                        source = {{ uri : imageUrl }}/>
+                        source = {{ uri : image }}/>
+                    <View>
+                        <Text> { artist }</Text>
+                        <Text> { name }</Text>
+                        <Text> { address }</Text>
+                    </View>
                     <MapView
                         style = {{ height: windowWidth, width: windowWidth }}
                         showUserLocation = { true }
+                        scrollEnabled = { false }
                         region = { region }
                         annotations={ marker }/>
                 </ScrollView>

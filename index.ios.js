@@ -26,7 +26,7 @@ class StreetArtNative extends Component {
     render() {
         return (
             <Navigator
-                initialRoute={{ title: 'My Initial Scene', name: "main" }}
+                initialRoute={{ name: "main" }}
                 renderScene={ this.renderScene }/>
             )
         }
