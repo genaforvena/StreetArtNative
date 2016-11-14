@@ -29,7 +29,7 @@ export default class MainScene extends Component {
     _renderContent = (name: string) => {
         if (name == "map") {
             return (
-                <ArtMap />
+                <ArtMap navigator = {this.props.navigator}/>
             )
         } else if (name == "list") {
             return (
@@ -86,7 +86,14 @@ class ArtMap extends Component {
                     latitude: location.lat,
                     longitude: location.lng,
                     subtitle: location.address,
-                    title: name
+                    title: name,
+                    onFocus: () => {
+                        this.props.navigator.push({
+                            component: DetailArtScene,
+                            title: name,
+                            passProps: { data: item }
+                        })
+                    }
                 }
             });
             this.setState({
@@ -96,7 +103,6 @@ class ArtMap extends Component {
     }
 
     render() {
-        console.log(this.state);
         return (
             <MapView
                 zoomEnabled = { true }
