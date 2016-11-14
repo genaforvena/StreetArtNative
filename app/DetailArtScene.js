@@ -50,8 +50,8 @@ class ArtObjectDetails extends Component {
         let region = {
             latitude: location.lat,
             longitude: location.lng,
-            latitudeDelta: 0.05,
-            longitudeDelta: 0.05
+            latitudeDelta: 0.005,
+            longitudeDelta: 0.005
         }
         return (
             <View style = {{ flex: 1 }}>

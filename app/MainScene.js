@@ -14,7 +14,6 @@ import {
 } from 'react-native';
 
 import DetailArtScene from './DetailArtScene'
-import fetchArtObjects from './fetch'
 
 export default class MainScene extends Component {
     static get defaultProps() {
@@ -28,11 +27,11 @@ export default class MainScene extends Component {
     };
 
     _renderContent = (name: string) => {
-        if (name == "map") {
+        if (name == 'map') {
             return (
                 <ArtMap navigator = {this.props.navigator}/>
             )
-        } else if (name == "list") {
+        } else if (name == 'list') {
             return (
                 <ArtList navigator = {this.props.navigator}/>
             )
