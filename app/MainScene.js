@@ -140,9 +140,11 @@ class ArtList extends Component {
     }
 
     onItemPress(rowData) {
+        let { name } = rowData;
         this.props.navigator.push({
-            name: "detail",
-            data: rowData
+            component: DetailArtScene,
+            title: name,
+            passProps: { data: rowData }
         })
     }
 
@@ -180,7 +182,6 @@ const styles = StyleSheet.create({
         flex: 1
     },
     list: {
-        paddingTop: 22,
         flexDirection: 'row',
         flexWrap: 'wrap',
     },

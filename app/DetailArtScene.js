@@ -22,7 +22,8 @@ export default class DetailArtScene extends Component {
     }
     render() {
         return (
-            <ArtObjectDetails data = { this.props.data } navigator = {this.props.navigator}/>
+            <ArtObjectDetails navigator = { this.props.navigator }
+                data = { this.props.data }/>
         )
     }
 }
@@ -30,13 +31,6 @@ export default class DetailArtScene extends Component {
 class ArtObjectDetails extends Component {
     constructor(props) {
         super(props);
-        this.navigateBack = this.navigateBack.bind(this);
-    }
-
-    navigateBack() {
-        this.props.navigator.push({
-            name: "main"
-        })
     }
 
     render() {
@@ -60,12 +54,7 @@ class ArtObjectDetails extends Component {
             longitudeDelta: 0.05
         }
         return (
-            <View style = {{ flex: 1, paddingTop: 22 }}>
-                <TouchableHighlight
-                    onPress = {this.navigateBack}
-                    style = {{ height: 22, width: 100}} >
-                    <Text>Back</Text>
-                </TouchableHighlight>
+            <View style = {{ flex: 1 }}>
                 <ScrollView>
                     <Image
                         style = { styles.image }
