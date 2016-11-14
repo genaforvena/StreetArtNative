@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import {
+    AsyncStorage,
     StyleSheet,
     ListView,
     TouchableHighlight,
@@ -79,28 +80,33 @@ class ArtMap extends Component {
     }
 
     componentDidMount() {
-        fetchArtObjects((json) => {
-            let markers = json.map(item => {
-                let { name, location } = item
-                return {
-                    latitude: location.lat,
-                    longitude: location.lng,
-                    subtitle: location.address,
-                    title: name,
-                    onFocus: () => {
-                        this.props.navigator.push({
-                            component: DetailArtScene,
-                            title: name,
-                            passProps: { data: item }
-                        })
-                    }
+        this._loadData().done()
+    }
+
+    _loadData = async () => {
+        let data = await AsyncStorage.getItem('data')
+        let json = JSON.parse(data);
+        let markers = json.map(item => {
+            let { name, location } = item
+            return {
+                latitude: location.lat,
+                longitude: location.lng,
+                subtitle: location.address,
+                title: name,
+                onFocus: () => {
+                    this.props.navigator.push({
+                        component: DetailArtScene,
+                        title: name,
+                        passProps: { data: item }
+                    })
                 }
-            });
-            this.setState({
-                markers: markers
-            })
+            }
+        });
+        this.setState({
+            markers: markers
         })
     }
+
 
     render() {
         return (
@@ -129,9 +135,13 @@ class ArtList extends Component {
     }
 
     componentDidMount() {
-        fetchArtObjects((json) => {
-            this.setState({ dataSource : this.state.dataSource.cloneWithRows(json)});
-        });
+        this._loadData().done();
+    }
+
+    _loadData = async () => {
+        let data = await AsyncStorage.getItem('data');
+        let json = JSON.parse(data);
+        this.setState({ dataSource : this.state.dataSource.cloneWithRows(json)});
     }
 
     render() {

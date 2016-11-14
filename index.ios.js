@@ -2,14 +2,22 @@
 
 import React, { Component } from 'react';
 import {
+    AsyncStorage,
     NavigatorIOS,
     AppRegistry
 } from 'react-native';
 
+import fetchArtObjects from './app/fetch';
 import MainScene from './app/MainScene';
 import DetailArtScene from './app/DetailArtScene';
 
 class StreetArtNative extends Component {
+    componentDidMount() {
+        fetchArtObjects(async (items) => {
+            await AsyncStorage.setItem("data", JSON.stringify(items));
+        })
+    }
+
     render() {
         return (
             <NavigatorIOS
