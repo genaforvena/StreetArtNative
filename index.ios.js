@@ -23,7 +23,8 @@ class StreetArtNative extends Component {
             <NavigatorIOS
                 initialRoute={{
                     component: MainScene,
-                    title: 'Main Scene'
+                    title: 'Main Scene',
+                    navigationBarHidden: true
                 }}
                 style = {{ flex: 1}} />
             )
