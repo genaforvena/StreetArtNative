@@ -86,16 +86,15 @@ class ArtMap extends Component {
         let data = await AsyncStorage.getItem('data')
         let json = JSON.parse(data);
         let markers = json.map(item => {
-            let { name, location } = item
             return {
-                latitude: location.lat,
-                longitude: location.lng,
-                subtitle: location.address,
-                title: name,
+                latitude: item.lat,
+                longitude: item.lng,
+                subtitle: item.address,
+                title: item.title,
                 onFocus: () => {
                     this.props.navigator.push({
                         component: DetailArtScene,
-                        title: name,
+                        title: item.title,
                         passProps: { data: item }
                     })
                 }
@@ -155,16 +154,15 @@ class ArtList extends Component {
     }
 
     onItemPress(rowData) {
-        let { name } = rowData;
         this.props.navigator.push({
             component: DetailArtScene,
-            title: name,
+            title: rowData.title,
             passProps: { data: rowData }
         })
     }
 
     renderRowData(rowData) {
-        let { image }  = rowData.photos[0]
+        let { image }  = rowData
         return (
             <TouchableHighlight
                 onPress = { () => this.onItemPress(rowData) }

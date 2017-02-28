@@ -35,21 +35,17 @@ class ArtObjectDetails extends Component {
 
     render() {
         let artObject = this.props.data;
-        let { image } = artObject.photos[0];
-        let { location } = artObject;
-        let artist = artObject.artists[0].name;
-        let { name } = artObject;
-        let { address } = location;
+        let { image } = artObject;
 
         let marker = [{
-            latitude: location.lat,
-            longitude: location.lng,
-            title: location.address
+            latitude: artObject.lat,
+            longitude: artObject.lng,
+            title: artObject.address
         }]
 
         let region = {
-            latitude: location.lat,
-            longitude: location.lng,
+            latitude: artObject.lat,
+            longitude: artObject.lng,
             latitudeDelta: 0.005,
             longitudeDelta: 0.005
         }
@@ -60,9 +56,9 @@ class ArtObjectDetails extends Component {
                         style = { styles.image }
                         source = {{ uri : image }}/>
                     <View>
-                        <Text> { artist }</Text>
-                        <Text> { name }</Text>
-                        <Text> { address }</Text>
+                        <Text> { artObject.artist }</Text>
+                        <Text> { artObject.title }</Text>
+                        <Text> { artObject.address }</Text>
                     </View>
                     <MapView
                         style = { styles.map }
