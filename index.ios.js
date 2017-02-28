@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 
 import fetchArtObjects from './app/fetch';
-import MainScene from './app/MainScene';
-import DetailArtScene from './app/DetailArtScene';
+import MainScene from './app/components/MainScene';
+import DetailArtScene from './app/components/DetailArtScene';
 
 class StreetArtNative extends Component {
     componentDidMount() {

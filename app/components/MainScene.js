@@ -105,7 +105,6 @@ class ArtMap extends Component {
         })
     }
 
-
     render() {
         return (
             <MapView
