@@ -86,6 +86,7 @@ class ArtMap extends Component {
     _loadData = async () => {
         let data = await AsyncStorage.getItem('data')
         let json = JSON.parse(data);
+        console.log(json);
         let markers = json.map(item => {
             return {
                 artObject: item,
@@ -134,6 +135,7 @@ class ArtMap extends Component {
                     ))}
                 </MapView>
                 <ArtObjectPreview
+                    navigator = { this.props.navigator }
                     artObject = { this.state.preview } />
             </View>
         );
@@ -145,20 +147,33 @@ class ArtObjectPreview extends Component {
         super(props);
     }
 
+    onPress() {
+        let artObject = this.props.artObject;
+        this.props.navigator.push({
+            component: DetailArtScene,
+            title: artObject.title,
+            passProps: { data: artObject }
+        })
+    }
+
     render() {
         let artObject = this.props.artObject;
         if (artObject) {
             return (
-                <View style = {{ position: 'absolute',
+                <TouchableHighlight style = {{ position: 'absolute',
                                 height: 150,
                                 width: 150,
                                 backgroundColor: 'white',
                                 top: 400,
                                 left: 0
-                            }}>
-                    <Text> { artObject.title } </Text>
-                    <Image source = {{ uri : artObject.image }} style = {{ height: 200, width: 200 }}/>
-                </View>
+                            }}
+                            onPress = {() => this.onPress()}
+                            >
+                            <View >
+                                <Text> { artObject.artist } </Text>
+                                <Image source = {{ uri : artObject.image }} style = {{ height: 200, width: 200 }}/>
+                            </View>
+                </TouchableHighlight>
             );
         } else {
             return null;
