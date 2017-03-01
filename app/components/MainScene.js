@@ -115,10 +115,10 @@ class ArtMap extends Component {
                     style = {{ flex: 1 }}>
                     {this.state.markers.map(marker => (
                         <MapView.Marker
-                            coordinate={marker.latlng}
-                            title={marker.title}
-                            description={marker.description}
-                            onSelect = {() => {
+                            coordinate = { marker.latlng }
+                            title = { marker.title }
+                            description = { marker.description }
+                            onSelect = { () => {
                                 console.log('on marker press with marker ' + marker);
                                 this.setState({
                                     markers: this.state.markers,
@@ -167,11 +167,12 @@ class ArtObjectPreview extends Component {
                                 top: 400,
                                 left: 0
                             }}
-                            onPress = {() => this.onPress()}
+                            onPress = { () => this.onPress() }
                             >
                             <View >
                                 <Text> { artObject.artist } </Text>
-                                <Image source = {{ uri : artObject.image }} style = {{ height: 200, width: 200 }}/>
+                                <Image source = {{ uri : artObject.image }}
+                                    style = {{ height: 200, width: 200 }}/>
                             </View>
                 </TouchableHighlight>
             );
@@ -185,7 +186,7 @@ class ArtObjectPreview extends Component {
 class ArtList extends Component {
     constructor(props) {
         super(props);
-        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         this.state = {
             dataSource: ds.cloneWithRows([])
         };
@@ -198,16 +199,16 @@ class ArtList extends Component {
     _loadData = async () => {
         let data = await AsyncStorage.getItem('data');
         let json = JSON.parse(data);
-        this.setState({ dataSource : this.state.dataSource.cloneWithRows(json)});
+        this.setState({ dataSource : this.state.dataSource.cloneWithRows(json) });
     }
 
     render() {
         return (
             <ListView
-                enableEmptySections={true}
-                contentContainerStyle={styles.list}
-                dataSource={this.state.dataSource}
-                renderRow={this.renderRowData.bind(this)}
+                enableEmptySections={ true }
+                contentContainerStyle={ styles.list }
+                dataSource={ this.state.dataSource }
+                renderRow={ this.renderRowData.bind(this) }
                 />
         );
     }
@@ -225,9 +226,9 @@ class ArtList extends Component {
         return (
             <TouchableHighlight
                 onPress = { () => this.onItemPress(rowData) }
-                style={styles.itemContainer}>
-                <View style={{ flex: 1 }}>
-                    <ArtObjectInList image={ image }/>
+                style = {styles.itemContainer}>
+                <View style = {{ flex: 1 }}>
+                    <ArtObjectInList image = { image }/>
                 </View>
             </TouchableHighlight>
         )
@@ -238,8 +239,8 @@ class ArtObjectInList extends Component {
     render() {
         return (
             <Image
-                style = {styles.image}
-                source = {{uri: this.props.image}}/>
+                style = { styles.image }
+                source = {{ uri: this.props.image }}/>
         )
     }
 }
