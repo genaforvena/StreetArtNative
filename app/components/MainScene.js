@@ -7,11 +7,12 @@ import {
     ListView,
     TouchableHighlight,
     Image,
-    MapView,
     Text,
     TabBarIOS,
     View
 } from 'react-native';
+
+import MapView from 'react-native-maps';
 
 import DetailArtScene from './DetailArtScene'
 
@@ -23,7 +24,7 @@ export default class MainScene extends Component {
     }
 
     state = {
-        selectedTab: 'list'
+        selectedTab: 'map'
     };
 
     _renderContent = (name: string) => {
@@ -87,17 +88,10 @@ class ArtMap extends Component {
         let json = JSON.parse(data);
         let markers = json.map(item => {
             return {
-                latitude: item.lat,
-                longitude: item.lng,
-                subtitle: item.address,
-                title: item.title,
-                onFocus: () => {
-                    this.props.navigator.push({
-                        component: DetailArtScene,
-                        title: item.title,
-                        passProps: { data: item }
-                    })
-                }
+                artObject: item,
+                latlng: { latitude: item.lat, longitude: item.lng },
+                description: item.address,
+                title: item.title
             }
         });
         this.setState({
@@ -107,19 +101,70 @@ class ArtMap extends Component {
 
     render() {
         return (
-            <MapView
-                zoomEnabled = { true }
-                showsUserLocation = { true }
-                region = {{
-                    latitude: 56.32,
-                    longitude: 44,
-                    latitudeDelta: 0.1,
-                    longitudeDelta: 0.1
-                }}
-                annotations = { this.state.markers }
-                style = {{ flex: 1 }}/>
+            <View style = {{ flex : 1 }} >
+                <MapView
+                    zoomEnabled = { true }
+                    showsUserLocation = { true }
+                    region = {{
+                        latitude: 56.32,
+                        longitude: 44,
+                        latitudeDelta: 0.1,
+                        longitudeDelta: 0.1
+                    }}
+                    style = {{ flex: 1 }}>
+                    {this.state.markers.map(marker => (
+                        <MapView.Marker
+                            coordinate={marker.latlng}
+                            title={marker.title}
+                            description={marker.description}
+                            onSelect = {() => {
+                                console.log('on marker press with marker ' + marker);
+                                this.setState({
+                                    markers: this.state.markers,
+                                    preview: marker.artObject
+                                })
+                            }}
+                            onDeselect = {() => {
+                                this.setState({
+                                    markers: this.state.markers,
+                                    preview: null
+                                })
+                            }}
+                            />
+                    ))}
+                </MapView>
+                <ArtObjectPreview
+                    artObject = { this.state.preview } />
+            </View>
         );
     }
+}
+
+class ArtObjectPreview extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        let artObject = this.props.artObject;
+        if (artObject) {
+            return (
+                <View style = {{ position: 'absolute',
+                                height: 150,
+                                width: 150,
+                                backgroundColor: 'white',
+                                top: 400,
+                                left: 0
+                            }}>
+                    <Text> { artObject.title } </Text>
+                    <Image source = {{ uri : artObject.image }} style = {{ height: 200, width: 200 }}/>
+                </View>
+            );
+        } else {
+            return null;
+        }
+    }
+
 }
 
 class ArtList extends Component {
