@@ -75,7 +75,13 @@ class ArtMap extends Component {
         super(props)
 
         this.state = {
-            markers :[]
+            markers: [],
+            region: {
+                latitude: 56.32,
+                longitude: 44,
+                latitudeDelta: 0.1,
+                longitudeDelta: 0.1
+            }
         }
     }
 
@@ -106,13 +112,15 @@ class ArtMap extends Component {
                 <MapView
                     zoomEnabled = { true }
                     showsUserLocation = { true }
-                    region = {{
-                        latitude: 56.32,
-                        longitude: 44,
-                        latitudeDelta: 0.1,
-                        longitudeDelta: 0.1
-                    }}
-                    style = {{ flex: 1 }}>
+                    region = { this.state.region }
+                    style = {{ flex: 1 }}
+                    onRegionChange = { (region) => {
+                        this.setState({
+                            markers: this.state.markers,
+                            preview: this.state.preview,
+                            region: region
+                        })
+                    }}>
                     {this.state.markers.map(marker => (
                         <MapView.Marker
                             coordinate = { marker.latlng }
@@ -122,13 +130,15 @@ class ArtMap extends Component {
                                 console.log('on marker press with marker ' + marker);
                                 this.setState({
                                     markers: this.state.markers,
-                                    preview: marker.artObject
+                                    preview: marker.artObject,
+                                    region: this.state.region
                                 })
                             }}
                             onDeselect = {() => {
                                 this.setState({
                                     markers: this.state.markers,
-                                    preview: null
+                                    preview: null,
+                                    region: this.state.region
                                 })
                             }}
                             />
