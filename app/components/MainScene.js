@@ -7,15 +7,15 @@ import {
     ListView,
     TouchableHighlight,
     Image,
+    Easing,
     Text,
     TabBarIOS,
     View
 } from 'react-native';
 
+import * as Animatable from 'react-native-animatable';
 import update from 'immutability-helper';
-
 import MapView from 'react-native-maps';
-
 import DetailArtScene from './DetailArtScene'
 
 export default class MainScene extends Component {
@@ -168,21 +168,29 @@ class ArtObjectPreview extends Component {
         let artObject = this.props.artObject;
         if (artObject) {
             return (
-                <TouchableHighlight style = {{ position: 'absolute',
-                                height: 150,
-                                width: 150,
-                                backgroundColor: 'white',
-                                top: 400,
-                                left: 0
-                            }}
-                            onPress = { () => this.onPress() }
-                            >
-                            <View >
-                                <Text> { artObject.artist } </Text>
-                                <Image source = {{ uri : artObject.image }}
-                                    style = {{ height: 200, width: 200 }}/>
-                            </View>
-                </TouchableHighlight>
+                <Animatable.View
+                    animation="slideInUp"
+                    iterationCount={1}
+                    direction = "normal"
+                    style = {{
+                        position: 'absolute',
+                        top: 400,
+                        left: 0,
+                        height: 150,
+                        width: 150
+                    }}>
+                    <TouchableHighlight
+                        style = {{
+                            backgroundColor: 'white',
+                        }}
+                        onPress = { () => this.onPress() }>
+                        <View>
+                            <Text> { artObject.artist } </Text>
+                            <Image source = {{ uri : artObject.image }}
+                                style = {{ height: 200, width: 200 }}/>
+                        </View>
+                    </TouchableHighlight>
+                </Animatable.View>
             );
         } else {
             return null;
