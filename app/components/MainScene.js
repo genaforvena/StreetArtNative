@@ -12,6 +12,8 @@ import {
     View
 } from 'react-native';
 
+import update from 'immutability-helper';
+
 import MapView from 'react-native-maps';
 
 import DetailArtScene from './DetailArtScene'
@@ -115,11 +117,10 @@ class ArtMap extends Component {
                     region = { this.state.region }
                     style = {{ flex: 1 }}
                     onRegionChange = { (region) => {
-                        this.setState({
-                            markers: this.state.markers,
-                            preview: this.state.preview,
-                            region: region
+                        let newState = update(this.state, {
+                            region: { $set: region }
                         })
+                        this.setState(newState);
                     }}>
                     {this.state.markers.map(marker => (
                         <MapView.Marker
@@ -127,19 +128,16 @@ class ArtMap extends Component {
                             title = { marker.title }
                             description = { marker.description }
                             onSelect = { () => {
-                                console.log('on marker press with marker ' + marker);
-                                this.setState({
-                                    markers: this.state.markers,
-                                    preview: marker.artObject,
-                                    region: this.state.region
+                                let newState = update(this.state, {
+                                    preview: { $set: marker.artObject }
                                 })
+                                this.setState(newState);
                             }}
                             onDeselect = {() => {
-                                this.setState({
-                                    markers: this.state.markers,
-                                    preview: null,
-                                    region: this.state.region
+                                let newState = update(this.state, {
+                                    preview: { $set: null }
                                 })
+                                this.setState(newState);
                             }}
                             />
                     ))}
