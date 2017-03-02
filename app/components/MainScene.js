@@ -169,7 +169,7 @@ class ArtObjectPreview extends Component {
         if (artObject) {
             return (
                 <Animatable.View
-                    animation="slideInUp"
+                    animation="fadeInUpBig"
                     iterationCount={1}
                     direction = "normal"
                     style = {{
