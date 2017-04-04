@@ -94,7 +94,9 @@ class ArtMap extends Component {
     _loadData = async () => {
         let data = await AsyncStorage.getItem('data')
         let json = JSON.parse(data);
-        console.log(json);
+        if (!json) {
+            return;
+        }
         let markers = json.map(item => {
             return {
                 artObject: item,
