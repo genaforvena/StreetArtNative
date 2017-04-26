@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import {
     StyleSheet,
     Dimensions,
+    Linking,
     Image,
     View,
     ScrollView,
@@ -62,6 +63,15 @@ export default class ArtObjectDetails extends Component {
                         <MapView.Marker
                             coordinate = { marker.latlng }
                             title = { marker.title }
+                            onPress = {() => {
+                                let geoUrl = "geo:" +
+                                        marker.latlng.latitude + "," +
+                                        marker.latlng.longitude;
+                                Linking.openURL(geoUrl)
+                                    .catch(err => console.error(
+                                        'An error occurred when opening ' + geoUrl,
+                                        err));
+                            }}
                             />
                     </MapView>
                 </ScrollView>
