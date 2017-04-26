@@ -73,15 +73,15 @@ export default class ArtObjectDetails extends Component {
 const styles = StyleSheet.create({
     artistText: {
         fontSize: 20,
-        paddingLeft: 5
+        paddingLeft: 10
     },
     titleText: {
         fontSize: 16,
-        paddingLeft: 2,
+        paddingLeft: 5,
         fontWeight: 'bold'
     },
     addressText: {
-        paddingLeft: 20,
+        paddingLeft: 25,
         paddingRight: 20,
         textAlign: 'justify'
     },
