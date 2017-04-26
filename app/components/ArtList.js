@@ -70,7 +70,7 @@ export default class ArtList extends Component {
 const styles = StyleSheet.create({
     artObjectWrapper: {
         flex: 1
-    }
+    },
     itemContainer: {
         padding: 1,
         height: windowWidth / 3,
