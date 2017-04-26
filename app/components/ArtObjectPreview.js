@@ -2,6 +2,8 @@
 
 import React, { Component } from 'react';
 import {
+    StyleSheet,
+    Dimensions,
     TouchableHighlight,
     Image,
     Text,
@@ -11,6 +13,8 @@ import {
 import * as Animatable from 'react-native-animatable';
 
 import DetailArtScene from './DetailArtScene';
+
+let windowWidth = Dimensions.get('window').width
 
 export default class ArtObjectPreview extends Component {
     constructor(props) {
@@ -32,25 +36,14 @@ export default class ArtObjectPreview extends Component {
             return (
                 <Animatable.View
                     animation="fadeInUpBig"
-                    iterationCount={1}
+                    iterationCount= { 1 }
                     direction = "normal"
-                    style = {{
-                        position: 'absolute',
-                        top: 400,
-                        left: 0,
-                        height: 150,
-                        width: 150
-                    }}>
+                    style = { styles.previewRoot } >
                     <TouchableHighlight
-                        style = {{
-                            backgroundColor: 'white',
-                        }}
-                        onPress = { () => this.onPress() }>
-                        <View>
-                            <Text> { artObject.artist } </Text>
-                            <Image source = {{ uri : artObject.image }}
-                                style = {{ height: 200, width: 200 }}/>
-                        </View>
+                        onPress = { () => this.onPress() } >
+                        <Image
+                            source = {{ uri : artObject.image }}
+                            style = { styles.image } />
                     </TouchableHighlight>
                 </Animatable.View>
             );
@@ -60,3 +53,20 @@ export default class ArtObjectPreview extends Component {
     }
 
 }
+
+const styles = StyleSheet.create({
+    previewRoot: {
+        position: 'absolute',
+        top: 400,
+        left: 5,
+        height: windowWidth / 2,
+        width: windowWidth / 2,
+    },
+    image: {
+        borderRadius: 2,
+        borderWidth: 6,
+        borderColor: 'black',
+        height: windowWidth / 2,
+        width: windowWidth / 2
+    }
+});
