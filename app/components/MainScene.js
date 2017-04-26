@@ -5,6 +5,7 @@ import {
     TabBarIOS
 } from 'react-native';
 
+import Icon from 'react-native-vector-icons/FontAwesome';
 import ArtMap from './ArtMap';
 import ArtList from './ArtList';
 
@@ -37,26 +38,26 @@ export default class MainScene extends Component {
                 unselectedTintColor="yellow"
                 tintColor="white"
                 barTintColor="darkslateblue">
-                <TabBarIOS.Item
-                    title="Map"
-                    selected={this.state.selectedTab === 'map'}
-                    onPress={() => {
+                <Icon.TabBarItem
+                    iconName = "map-signs"
+                    selected = {this.state.selectedTab === 'map'}
+                    onPress = {() => {
                         this.setState({
                             selectedTab: 'map'
                         });
                     }}>
                     {this._renderContent('map')}
-                </TabBarIOS.Item>
-                <TabBarIOS.Item
-                    systemIcon="history"
-                    selected={this.state.selectedTab === 'list'}
-                    onPress={() => {
+                </Icon.TabBarItem>
+                <Icon.TabBarItem
+                    iconName = "eye"
+                    selected = { this.state.selectedTab === 'list' }
+                    onPress = { () => {
                         this.setState({
                             selectedTab: 'list'
                         });
                     }}>
                     {this._renderContent('list')}
-                </TabBarIOS.Item>
+                </Icon.TabBarItem>
             </TabBarIOS>
         )
     }
