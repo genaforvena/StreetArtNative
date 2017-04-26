@@ -41,9 +41,18 @@ export default class ArtObjectDetails extends Component {
                         style = { styles.image }
                         source = {{ uri : image }}/>
                     <View>
-                        <Text> { artObject.artist }</Text>
-                        <Text> { artObject.title }</Text>
-                        <Text> { artObject.address }</Text>
+                        <Text
+                            style = { styles.artistText } >
+                            { artObject.artist }
+                        </Text>
+                        <Text
+                            style = { styles.titleText } >
+                            { artObject.title }
+                        </Text>
+                        <Text
+                            style = { styles.addressText } >
+                            { artObject.address }
+                        </Text>
                     </View>
                     <MapView
                         style = { styles.map }
@@ -62,11 +71,26 @@ export default class ArtObjectDetails extends Component {
 }
 
 const styles = StyleSheet.create({
+    artistText: {
+        fontSize: 20,
+        paddingLeft: 5
+    },
+    titleText: {
+        fontSize: 16,
+        paddingLeft: 2,
+        fontWeight: 'bold'
+    },
+    addressText: {
+        paddingLeft: 20,
+        paddingRight: 20,
+        textAlign: 'justify'
+    },
     image: {
         height: windowWidth,
         width: windowWidth
     },
     map: {
+        marginTop: 10,
         height: windowWidth,
         width: windowWidth
     }
