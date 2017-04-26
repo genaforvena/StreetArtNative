@@ -10,6 +10,8 @@ import {
 
 import * as Animatable from 'react-native-animatable';
 
+import DetailArtScene from './DetailArtScene';
+
 export default class ArtObjectPreview extends Component {
     constructor(props) {
         super(props);

@@ -6,10 +6,11 @@ import {
     Dimensions,
     Image,
     View,
-    MapView,
     ScrollView,
     Text
 } from 'react-native';
+
+import MapView from 'react-native-maps';
 
 let windowWidth = Dimensions.get('window').width
 
@@ -22,11 +23,10 @@ export default class ArtObjectDetails extends Component {
         let artObject = this.props.data;
         let { image } = artObject;
 
-        let marker = [{
-            latitude: artObject.lat,
-            longitude: artObject.lng,
+        let marker = {
+            latlng: { latitude: artObject.lat, longitude: artObject.lat},
             title: artObject.address
-        }]
+        }
 
         let region = {
             latitude: artObject.lat,
@@ -49,8 +49,12 @@ export default class ArtObjectDetails extends Component {
                         style = { styles.map }
                         showUserLocation = { true }
                         scrollEnabled = { false }
-                        region = { region }
-                        annotations={ marker }/>
+                        region = { region } >
+                        <MapView.Marker
+                                coordinate = { marker.latlng }
+                                title = { marker.title }
+                                />
+                    </MapView>
                 </ScrollView>
             </View>
         );
