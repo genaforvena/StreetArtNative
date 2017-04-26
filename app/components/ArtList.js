@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import {
     AsyncStorage,
+    Dimensions,
     StyleSheet,
     ListView,
     TouchableHighlight,
@@ -11,6 +12,8 @@ import {
 
 import ArtObjectInList from './ArtObjectInList';
 import DetailArtScene from './DetailArtScene';
+
+let windowWidth = Dimensions.get('window').width
 
 export default class ArtList extends Component {
     constructor(props) {
@@ -67,8 +70,8 @@ export default class ArtList extends Component {
 const styles = StyleSheet.create({
     itemContainer: {
         padding: 1,
-        height: 122,
-        width: 122
+        height: windowWidth / 3,
+        width: windowWidth / 3
     },
     list: {
         flexDirection: 'row',

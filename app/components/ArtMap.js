@@ -27,7 +27,7 @@ export default class ArtMap extends Component {
     }
 
     componentDidMount() {
-        this._loadData().done()
+        this._loadData().done();
     }
 
     _loadData = async () => {
