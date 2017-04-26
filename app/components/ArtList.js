@@ -58,8 +58,8 @@ export default class ArtList extends Component {
         return (
             <TouchableHighlight
                 onPress = { () => this.onItemPress(rowData) }
-                style = {styles.itemContainer}>
-                <View style = {{ flex: 1 }}>
+                style = { styles.itemContainer }>
+                <View style = { styles.artObjectWrapper }>
                     <ArtObjectInList image = { image }/>
                 </View>
             </TouchableHighlight>
@@ -68,6 +68,9 @@ export default class ArtList extends Component {
 }
 
 const styles = StyleSheet.create({
+    artObjectWrapper: {
+        flex: 1
+    }
     itemContainer: {
         padding: 1,
         height: windowWidth / 3,

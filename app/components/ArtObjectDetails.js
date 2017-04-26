@@ -36,7 +36,7 @@ export default class ArtObjectDetails extends Component {
             longitudeDelta: 0.005
         }
         return (
-            <View style = {{ flex: 1 }}>
+            <View style = { styles.root }>
                 <ScrollView>
                     <Image
                         style = { styles.image }
@@ -81,6 +81,9 @@ export default class ArtObjectDetails extends Component {
 }
 
 const styles = StyleSheet.create({
+    root: {
+        flex: 1
+    },
     artistText: {
         fontSize: 20,
         paddingLeft: 10

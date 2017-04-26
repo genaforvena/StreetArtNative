@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import {
     AsyncStorage,
+    StyleSheet,
     View
 } from 'react-native';
 
@@ -51,12 +52,12 @@ export default class ArtMap extends Component {
 
     render() {
         return (
-            <View style = {{ flex : 1 }} >
+            <View style = { styles.root } >
                 <MapView
                     zoomEnabled = { true }
                     showsUserLocation = { true }
                     region = { this.state.region }
-                    style = {{ flex: 1 }}
+                    style = { styles.map }
                     onRegionChange = { (region) => {
                         let newState = update(this.state, {
                             region: { $set: region }
@@ -90,3 +91,12 @@ export default class ArtMap extends Component {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    root: {
+        flex: 1
+    },
+    map: {
+        flex: 1
+    }
+});
