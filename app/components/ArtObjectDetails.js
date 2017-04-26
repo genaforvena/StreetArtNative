@@ -24,7 +24,7 @@ export default class ArtObjectDetails extends Component {
         let { image } = artObject;
 
         let marker = {
-            latlng: { latitude: artObject.lat, longitude: artObject.lat},
+            latlng: { latitude: artObject.lat, longitude: artObject.lng},
             title: artObject.address
         }
 
@@ -51,9 +51,9 @@ export default class ArtObjectDetails extends Component {
                         scrollEnabled = { false }
                         region = { region } >
                         <MapView.Marker
-                                coordinate = { marker.latlng }
-                                title = { marker.title }
-                                />
+                            coordinate = { marker.latlng }
+                            title = { marker.title }
+                            />
                     </MapView>
                 </ScrollView>
             </View>
