@@ -10,12 +10,6 @@ import ArtMap from './ArtMap';
 import ArtList from './ArtList';
 
 export default class MainScene extends Component {
-    static get defaultProps() {
-        return {
-            title: 'Main Scene'
-        };
-    }
-
     state = {
         selectedTab: 'map'
     };
